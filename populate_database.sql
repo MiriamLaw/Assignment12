@@ -4,7 +4,7 @@ DELETE FROM Orders;
 DELETE FROM Customers;
 DELETE FROM Pizzas;
 
-select * from pizzas;
+SELECT * FROM pizzas;
 
 INSERT INTO pizzas (pizza_type, price) 
 VALUES
@@ -13,14 +13,14 @@ VALUES
 ('Meat Lovers', 14.99),
 ('Hawaiian', 12.99);
 
-select * from customers;
+SELECT * FROM customers;
 
 INSERT INTO Customers (customer_name, phone_number) 
 VALUES
 ('Trevor Page', '226-555-4982'),
 ('John Doe', '555-555-9498');
 
-select * from orders;
+SELECT * FROM orders;
 
 INSERT INTO Orders (customer_id, order_date_time) 
 VALUES
@@ -36,7 +36,7 @@ VALUES
 (11, 23, 2), 
 (12, 23, 1), 
 (12, 24, 1); 
-select * from pizzas_orders;
+SELECT * FROM pizzas_orders;
 
 SELECT 
 c.customer_name,
@@ -48,18 +48,18 @@ JOIN Pizzas_Orders po ON o.order_id = po.order_id
 JOIN Pizzas p ON po.pizza_id = p.pizza_id
 GROUP BY c.customer_id;
 
-Select
+SELECT
 	c.customer_name,
     c.phone_number,
     DATE(o.order_date_time) AS order_date,
     SUM(p.price * po.quantity) AS total_amount
-From
+FROM
 	Customers c
-Join
+JOIN
 	Orders o ON c.customer_id = o.customer_id
 JOIN
 	Pizzas_Orders po ON o.order_id = po.order_id
-Join
+JOIN
 	Pizzas p ON po.pizza_id = p.pizza_id
-Group By
+GROUP BY
 	c.customer_id, DATE(o.order_date_time);
